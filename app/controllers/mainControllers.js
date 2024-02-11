@@ -46,7 +46,8 @@ exports.login = async (req, res) => {
     }
 };
 
-exports.game = (req, res) => {
+exports.game = async (req, res) => {
+    const { username } = req.params;
     const { user } = req.body;
 
     //Token Authorization
@@ -55,28 +56,32 @@ exports.game = (req, res) => {
         return res.status(401).json({ message: 'Unauthorized: Missing or invalid token' });
     }
 
-    const tokenCheck = Users.findOne(token);
-    console.log("tokenCheck:", tokenCheck)
-    if (!tokenCheck) {
-        return res.status(401).json({ message: 'Unauthorized: Missing or invalid token' });
-    }
+    try {
 
-    //Start Game
-    const result = playGame(user);
-    console.log(result);
-    const gameHistory = new Games({ 
-        userMove: result.userMove, 
-        computerMove: result.computerMove, 
-        result: result.result });
+        // Extract token from the authorization header
+        const authToken = token.split(' ')[1];
+        // Find the user by username
+        const checkToken = await Users.findOne({ username });
+        // If user not found or token does not match, return unauthorized
+        if (!checkToken || checkToken.token !== authToken) {
+            return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+        }
 
-    gameHistory.save()
-        .then(savedResult => {
-            console.log('Game result saved:', savedResult);
-        })
-        .catch(error => {
-            console.error('Error saving game result:', error);
+        //Start Game
+        const result = playGame(user);
+        console.log(result);
+        const gameHistory = new Games({ 
+            userMove: result.userMove, 
+            computerMove: result.computerMove, 
+            result: result.result 
         });
-    res.json(result);
+
+        gameHistory.save();
+        res.status(200).json(result);
+    } catch (error) {
+        console.error('Error Game:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 };
 
 
@@ -90,12 +95,17 @@ exports.logout = async (req, res) => {
         return res.status(401).json({ message: 'Unauthorized: Missing or invalid token' });
     }
 
-    const tokenCheck = Users.findOne(token);
-    if (!tokenCheck) {
-        return res.status(401).json({ message: 'Unauthorized: Missing or invalid token' });
-    }
-
     try {
+
+        // Extract token from the authorization header
+        const authToken = token.split(' ')[1];
+        // Find the user by username
+        const checkToken = await Users.findOne({ username });
+        // If user not found or token does not match, return unauthorized
+        if (!checkToken || checkToken.token !== authToken) {
+            return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+        }
+
         // Find the game result by ID and delete it
         await Users.findOneAndUpdate({ username }, { $unset: { token: '' } })
 

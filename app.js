@@ -1,20 +1,20 @@
 const express = require("express");
-// const cors = require("cors");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const mainRoutes = require('./app/routes/mainRoutes');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
-// const corsOption = {
-//     origin : "*"
-// };
+const corsOption = {
+    origin : "*"
+};
 
 //register cors middleware
-// app.use(cors(corsOption))
-app.use(express.json())
+app.use(cors(corsOption));
+app.use(express.json());
 
 //connect to database
 const mongooseConfig = {

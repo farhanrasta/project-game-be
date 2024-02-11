@@ -48,7 +48,7 @@ exports.login = async (req, res) => {
 
 exports.game = async (req, res) => {
     const { username } = req.params;
-    const { user } = req.body;
+    const { userMove } = req.body;
 
     //Token Authorization
     const token = req.headers.authorization;
@@ -68,7 +68,7 @@ exports.game = async (req, res) => {
         }
 
         //Start Game
-        const result = playGame(user);
+        const result = playGame(userMove);
         console.log(result);
         const gameHistory = new Games({ 
             userMove: result.userMove, 

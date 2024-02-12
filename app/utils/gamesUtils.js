@@ -5,7 +5,7 @@ function generateComputerMove() {
 
 function determineWinner(userMove, computerMove) {
     if (userMove === computerMove) {
-        return 'Tie';
+        return 'Seri';
     } else if (
         (userMove === 'batu' && computerMove === 'gunting') ||
         (userMove === 'kertas' && computerMove === 'batu') ||

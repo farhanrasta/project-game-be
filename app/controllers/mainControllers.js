@@ -12,14 +12,14 @@ exports.signup = async (req, res) => {
         const user = await Users.findOne({ username });
         console.log(user);
         if (user) {
-            return res.status(401).send('User has already registered');
+            return res.status(401).send({message :'User has already registered'});
         }
 
         const saveUser = new Users({ username, password: hashedPassword, name });
         await saveUser.save();
-        res.status(201).send('Users created successfully');
+        res.status(201).send({message : 'Users created successfully'});
     } catch (error) {
-        res.status(500).send('Error creating Users');
+        res.status(500).send({message : 'Error creating Users'});
     }
 };
 

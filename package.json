@@ -4,7 +4,7 @@
   "description": "Project Game Back-End",
   "main": "app.js",
   "scripts": {
-    "dev" : "nodemon app.js",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/farhanrasta/project-game-be#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.1",
     "nodemon": "^3.0.3"
   }

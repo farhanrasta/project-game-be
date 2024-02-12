@@ -1,19 +1,20 @@
 const mongoose = require("mongoose");
 
-module.exports = mongoose => {
+const gamesSchema = new mongoose.Schema(
+    {
+        userMove: String,
+        computerMove: String,
+        result: String
+    },{
+        timestamps : true
+    }
+);
 
-    const games = mongoose.Schema(
-        {
-            user: String,
-            computer: String 
-        },{
-            timestamps : true
-        }
-    );
+const Games = mongoose.model("Games", gamesSchema);
 
-    return mongoose.model("games", games);
+module.exports = Games;
 
-}
+
 
 
     

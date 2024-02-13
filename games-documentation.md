@@ -12,6 +12,7 @@ Request Body :
 {
     "username" : "densa123",
     "password" : "densa123", // ketika di save buat jadi form data
+    "retypePassword" : "densa123",
     "name" : "Deni Saputra"
 }
 ```

@@ -4,7 +4,9 @@ const gamesSchema = new mongoose.Schema(
     {
         userMove: String,
         computerMove: String,
-        result: String
+        result: String,
+        userWins: String,
+        computerWins: String
     },{
         timestamps : true
     }

@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
 
 exports.game = async (req, res) => {
     const { username } = req.params;
-    const { userMove } = req.body;
+    const { userMove, computerMove } = req.body;
 
     //Token Authorization
     const token = req.headers.authorization;
@@ -75,12 +75,14 @@ exports.game = async (req, res) => {
         }
 
         //Start Game
-        const result = playGame(userMove);
+        const result = playGame(userMove, computerMove);
         console.log(result);
         const gameHistory = new Games({ 
             userMove: result.userMove, 
             computerMove: result.computerMove, 
-            result: result.result 
+            result: result.result,
+            userWins: result.userWins,
+            computerWins: result.computerWins 
         });
 
         gameHistory.save();

@@ -9,22 +9,22 @@
     "routes": [
         {
             "src": "/signup",
-            "dest": "mainRoutes.js",
+            "dest": "./app/routes/mainRoutes.js",
             "status": 301
         },
         {
             "src": "/login",
-            "dest": "mainRoutes.js",
+            "dest": "./app/routes/mainRoutes.js",
             "status": 301
         },
         {
             "src": "/game/:username",
-            "dest": "mainRoutes.js",
+            "dest": "./app/routes/mainRoutes.js",
             "status": 301
         },
         {
             "src": "/logout:username",
-            "dest": "mainRoutes.js",
+            "dest": "./app/routes/mainRoutes.js",
             "status": 301
           },
           {

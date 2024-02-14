@@ -1,3 +1,6 @@
+let userWins = 0;
+let computerWins = 0;
+
 function generateComputerMove() {
     const moves = ['batu', 'kertas', 'gunting'];
     return moves[Math.floor(Math.random() * moves.length)];
@@ -5,12 +8,9 @@ function generateComputerMove() {
 
 function determineWinner(userMove, computerMove) {
 
-    let userWins = 0;
-    let computerWins = 0;
     let result;
-
     if (userMove === computerMove) {
-        return 'SERI!';
+        result = 'Draw! Roll Again!';
     } else if (
         (userMove === 'batu' && computerMove === 'gunting') ||
         (userMove === 'kertas' && computerMove === 'batu') ||

@@ -4,6 +4,53 @@ const Users = require('../models/usersModel');
 const Games = require('../models/gamesModel')
 const { playGame } = require('../utils/gamesUtils.js')
 
+const Leaderboard = require('../models/leaderboardModel');
+const { addToLeaderboard } = require('./mainControllers');
+
+
+exports.leaderboard = async (req, res) => {
+    const { username } = req.params;
+    // const { userMove } = req.body;
+
+    //Token Authorization
+    const token = req.headers.authorization;
+    if (!token || !token.startsWith('Bearer ')) {
+        return res.status(401).json({ message: 'Unauthorized: Missing or invalid token' });
+    }
+
+    try {
+
+        // Extract token from the authorization header
+        const authToken = token.split(' ')[1];
+        // Find the user by username
+        const checkToken = await Users.findOne({ username });
+        // If user not found or token does not match, return unauthorized
+        if (!checkToken || checkToken.token !== authToken) {
+            return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+        }
+
+        //Start Game
+        const result = playGame(userMove);
+        console.log(result);
+
+        // Tambahkan hasil permainan ke leaderboard
+        await addToLeaderboard(result);
+
+        // Simpan hasil permainan ke model game
+        const gameHistory = new Games({ 
+            userMove: result.userMove, 
+            computerMove: result.computerMove, 
+            result: result.result 
+        });
+        gameHistory.save();
+
+        res.status(200).json(result);
+    } catch (error) {
+        console.error('Error Game:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 exports.signup = async (req, res) => {
     try {
         const { username, password, retypePassword, name } = req.body;
@@ -83,7 +130,14 @@ exports.game = async (req, res) => {
             result: result.result 
         });
 
+        //if (result.result )
+        const leaderboard = new Leaderboard({
+            username : username,
+            score : 10
+        });
+
         gameHistory.save();
+        leaderboard.save();
         res.status(200).json(result);
     } catch (error) {
         console.error('Error Game:', error);

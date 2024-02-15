@@ -43,6 +43,7 @@ exports.game = async (req, res) => {
 
         await player.save();
 
+        //save leaderboard
         const leaderboard = new Leaderboard({
             username : username,
             userWins : result.userWins

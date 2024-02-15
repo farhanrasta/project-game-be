@@ -2,10 +2,7 @@ const mongoose = require("mongoose");
 
 const gamesSchema = new mongoose.Schema(
     {
-        username: {
-            type: String,
-            unique: true
-        },
+        username: String,
         name: String,
         userMove: String,
         computerMove: String,

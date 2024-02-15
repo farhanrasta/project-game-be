@@ -1,35 +1,15 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "app.js",
-        "use": "@now/node"
-      }
-    ],
-    "routes": [
-        {
-            "src": "/signup",
-            "dest": "./app/routes/mainRoutes.js",
-            "status": 301
-        },
-        {
-            "src": "/login",
-            "dest": "./app/routes/mainRoutes.js",
-            "status": 301
-        },
-        {
-            "src": "/game/:username",
-            "dest": "./app/routes/mainRoutes.js",
-            "status": 301
-        },
-        {
-            "src": "/logout:username",
-            "dest": "./app/routes/mainRoutes.js",
-            "status": 301
-          },
-          {
-            "src": "/api",
-            "dest": "app.js"
-        }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.js"
+    }
+  ]
+}

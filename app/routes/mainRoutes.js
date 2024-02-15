@@ -10,5 +10,7 @@ router.post('/game/:username', gameController.game);
 router.post('/game/reset/:username', gameController.reset);
 router.delete('/logout/:username', authController.logout);
 
+router.get('/leaderboard/:username', gameController.leaderboard);
+
 
 module.exports = router;

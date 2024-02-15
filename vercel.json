@@ -4,6 +4,7 @@
     {
       "src": "app.js",
       "use": "@vercel/node"
+
     }
   ],
   "routes": [
@@ -12,4 +13,6 @@
       "dest": "/"
     }
   ]
+
 }
+

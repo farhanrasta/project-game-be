@@ -4,7 +4,7 @@
   "description": "Project Game Back-End",
   "main": "app.js",
   "engines": {
-    "node": "14.x"
+    "node": "20.x"
   },
   "scripts": {
     "dev": "node app.js",

@@ -9,6 +9,7 @@ exports.signup = async (req, res) => {
         if (password !== retypePassword) {
             return res.status(400).send({ message: 'Passwords do not match' });
         }
+        console.log("tes ini han");
 
         const hashedPassword = await bcrypt.hash(password, 10);
 

@@ -2,9 +2,13 @@ const mongoose = require("mongoose");
 
 const gamesSchema = new mongoose.Schema(
     {
+        username: String,
+        name: String,
         userMove: String,
         computerMove: String,
-        result: String
+        result: String,
+        userWins: String,
+        computerWins: String
     },{
         timestamps : true
     }

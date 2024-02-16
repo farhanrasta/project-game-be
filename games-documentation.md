@@ -8,12 +8,12 @@ Method : POST
 
 Request Body :
 
-```json 
+```json
 {
-    "username" : "densa123",
-    "password" : "densa123", // ketika di save buat jadi form data
-    "retypePassword" : "densa123",
-    "name" : "Deni Saputra"
+  "username": "densa123",
+  "password": "densa123", // ketika di save buat jadi form data
+  "retypePassword": "densa123",
+  "name": "Deni Saputra"
 }
 ```
 
@@ -21,7 +21,7 @@ Response Body (Success):
 
 ```json
 {
-    "data" : "Ok"
+  "data": "Ok"
 }
 ```
 
@@ -29,24 +29,22 @@ Response Body (Failed):
 
 ```json
 {
-    "errors" : "Username has already exist"
+  "errors": "Username has already exist"
 }
 ```
 
-
-
 ## Login User
 
-Endpoint : http://localhost:3000/api/login
+Endpoint : http://localhost:5000/api/login
 
 Method : POST
 
 Request Body :
 
-```json 
+```json
 {
-    "username" : "densa123",
-    "password" : "densa123" //form data
+  "username": "densa123",
+  "password": "densa123" //form data
 }
 ```
 
@@ -54,10 +52,10 @@ Response Body (Success):
 
 ```json
 {
-    "data" : {
-      "token" : "TOKEN",
-      "expiredAt" : 164681687646 
-    }
+  "data": {
+    "token": "TOKEN",
+    "expiredAt": 164681687646
+  }
 }
 ```
 
@@ -65,15 +63,13 @@ Response Body (Failed, 401):
 
 ```json
 {
-    "errors" : "username or password is incorrect"
+  "errors": "username or password is incorrect"
 }
 ```
 
-
-
 ## Game Display
 
-Endpoint : http://localhost:3000/api/game
+Endpoint : http://localhost:5000/api/game/{username}
 
 Method : POST
 
@@ -83,10 +79,10 @@ Request Header :
 
 Request Body :
 
-```json 
+```json
 {
-    "user" : "gunting",
-    "computer" : "kertas" //di random
+  "userMove": "gunting",
+  "computerMove": "kertas" //di random
 }
 ```
 
@@ -94,7 +90,7 @@ Response Body (Success):
 
 ```json
 {
-  "data" : "anda menang!"
+  "data": "anda menang!"
 }
 ```
 
@@ -102,15 +98,13 @@ Response Body (Failed, 401):
 
 ```json
 {
-    "errors" : "Unauthorized"
+  "errors": "Unauthorized"
 }
 ```
 
-
-
 ## Logout User
 
-Endpoint : http://localhost:3000/api/logout
+Endpoint : http://localhost:5000/api/logout/{username}
 
 Method : DELETE
 
@@ -122,6 +116,6 @@ Response Body (Success) :
 
 ```json
 {
-    "data" : "Ok"
+  "data": "Ok"
 }
 ```

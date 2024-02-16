@@ -11,8 +11,4 @@ router.post('/game/reset/:username', gameController.reset);
 router.delete('/logout/:username', authController.logout);
 router.get('/game/leaderboard/:username', gameController.leaderboard);
 
-// Periksa apakah Anda telah menulis nama fungsi dengan benar di sini
-router.get('/leaderboard/:username', mainController.leaderboard);
-
-
 module.exports = router;

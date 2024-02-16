@@ -9,7 +9,7 @@ router.post('/login', authController.login);
 router.post('/game/:username', gameController.game);
 router.post('/game/reset/:username', gameController.reset);
 router.delete('/logout/:username', authController.logout);
-router.get('/leaderboard/:username', gameController.leaderboard);
+router.get('/game/leaderboard/:username', gameController.leaderboard);
 
 // Periksa apakah Anda telah menulis nama fungsi dengan benar di sini
 router.get('/leaderboard/:username', mainController.leaderboard);

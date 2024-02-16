@@ -26,13 +26,22 @@ exports.game = async (req, res) => {
         }
 
         //Start Game
-        const result = playGame(userMove, computerMove);
-        console.log(result);
         let player = await Games.findOne({ username });
-
         if (!player) {
             player = new Games({ username });
         }
+
+        console.log(player.userWins, "playUs");
+        console.log(player.computerWins, "playCom");
+
+        //get User Win History
+        let usWins = (player.userWins != null ? player.userWins : 0 );
+        console.log(usWins, "usWins");
+        let comWins = (player.computerWins != null ? player.computerWins : 0);
+        console.log(comWins, "comWins");
+
+        const result = playGame(userMove, computerMove, usWins, comWins);
+        console.log(result);
 
         player.name = userTable.name;
         player.userMove = result.userMove;
@@ -44,12 +53,12 @@ exports.game = async (req, res) => {
         await player.save();
 
         //save leaderboard
-        const leaderboard = new Leaderboard({
-            username : username,
-            userWins : result.userWins
-        });
+        // const leaderboard = new Leaderboard({
+        //     username : username,
+        //     userWins : result.userWins
+        // });
 
-        leaderboard.save();
+        // leaderboard.save();
         res.status(200).json(result);
     } catch (error) {
         console.error('Error Game:', error);
@@ -59,7 +68,6 @@ exports.game = async (req, res) => {
 
 exports.reset = async (req, res) => {
     const { username } = req.params;
-    const { userWins, computerWins } = req.body;
 
     //Token Authorization
     const token = req.headers.authorization;
@@ -84,8 +92,8 @@ exports.reset = async (req, res) => {
             player = new Games({ username });
         }
 
-        player.userWins = userWins;
-        player.computerWins = computerWins;
+        player.userWins = 0;
+        player.computerWins = 0;
         
         await player.save();
 
@@ -119,7 +127,7 @@ exports.leaderboard = async (req, res) => {
         }
 
         // Tambahkan hasil permainan ke leaderboard
-        const leaderboardData = await Leaderboard.find().sort({ userWins: -1 }).limit(10);
+        const leaderboardData = await Games.find().sort({ userWins: -1 });
         console.log(leaderboardData, "leader");
 
         res.status(200).json(leaderboardData);

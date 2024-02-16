@@ -7,8 +7,8 @@ const gamesSchema = new mongoose.Schema(
         userMove: String,
         computerMove: String,
         result: String,
-        userWins: String,
-        computerWins: String
+        userWins: Number,
+        computerWins: Number
     },{
         timestamps : true
     }

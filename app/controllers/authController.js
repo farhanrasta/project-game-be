@@ -20,9 +20,40 @@ exports.login = async (req, res) => {
         await user.save();
         res.status(200).json({ token });
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Error logging in');
+        console.error('Error login:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
+};
+
+exports.getLogin = async (req, res) => {
+    
+    const { username } = req.params;
+
+    //Token Authorization
+    const token = req.headers.authorization;
+    if (!token || !token.startsWith('Bearer ')) {
+        return res.status(401).json({ message: 'Unauthorized: Missing or invalid token' });
+    }
+
+    try {
+
+        // Extract token from the authorization header
+        const authToken = token.split(' ')[1];
+        // Find the user by username
+        const checkToken = await Users.findOne({ username });
+        // If user not found or token does not match, return unauthorized
+        if (!checkToken || checkToken.token !== authToken) {
+            return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+        }
+
+        //Send name to response
+        const name = checkToken.name;
+        res.status(200).json({name});
+    } catch (error) {
+        console.error('Error fetching name:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+
 };
 
 exports.logout = async (req, res) => {
@@ -51,7 +82,7 @@ exports.logout = async (req, res) => {
 
         res.status(200).json({ message: 'Logout successful' });
     } catch (error) {
-        console.error('Error deleting game result:', error);
+        console.error('Error logout:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
     

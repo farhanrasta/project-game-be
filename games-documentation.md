@@ -2,7 +2,7 @@
 
 ## Sign Up User
 
-Endpoint : http://localhost:3000/api/signup
+Endpoint : https://joey-pet-minnow.ngrok-free.app/api/signup
 
 Method : POST
 
@@ -35,7 +35,7 @@ Response Body (Failed):
 
 ## Login User
 
-Endpoint : http://localhost:5000/api/login
+Endpoint : https://joey-pet-minnow.ngrok-free.app/api/login
 
 Method : POST
 
@@ -53,8 +53,7 @@ Response Body (Success):
 ```json
 {
   "data": {
-    "token": "TOKEN",
-    "expiredAt": 164681687646
+    "token": "TOKEN"
   }
 }
 ```
@@ -69,7 +68,7 @@ Response Body (Failed, 401):
 
 ## Game Display
 
-Endpoint : http://localhost:5000/api/game/{username}
+Endpoint : https://joey-pet-minnow.ngrok-free.app0/api/game/{username}
 
 Method : POST
 
@@ -102,9 +101,52 @@ Response Body (Failed, 401):
 }
 ```
 
+## Leaderboard
+
+Endpoint : https://joey-pet-minnow.ngrok-free.app/api/game/leaderboard/{username}
+
+Method : POST
+
+Request Header :
+
+- X-API-TOKEN : Token (Mandatory)
+
+Response Body (Success) :
+
+```json
+{
+  "username": "densa123",
+  "name": "Deni Saputra",
+  "userWins": 5
+},
+{
+  "username": "player2",
+  "name": "PLAYER 2",
+  "userWins": 3
+}
+
+```
+
+## Reset Game
+
+Endpoint : https://joey-pet-minnow.ngrok-free.app/api/game/reset/{username}
+
+Method : POST
+
+Request Header :
+
+- X-API-TOKEN : Token (Mandatory)
+
+Response Body (Success) :
+
+```json
+{
+  "data": "Ok"
+}
+```
 ## Logout User
 
-Endpoint : http://localhost:5000/api/logout/{username}
+Endpoint : https://joey-pet-minnow.ngrok-free.app/api/logout/{username}
 
 Method : DELETE
 

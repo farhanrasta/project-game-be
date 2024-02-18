@@ -17,20 +17,24 @@ app.use(cors(corsOption));
 app.use(express.json());
 
 //connect to database
-const mongooseConfig = {
-    'useNewUrlParser': true,
-    'useUnifiedTopology': true
-};
+// const mongooseConfig = {
+//     'useNewUrlParser': true,
+//     'useUnifiedTopology': true
+// };
 
-mongoose.connect("mongodb://127.0.0.1:27017/project-game", mongooseConfig)
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error: "));
-db.once("open", function() {
-    console.log("Connected to MongoDB")
-})
+// mongoose.connect("mongodb://127.0.0.1:27017/project-game", mongooseConfig)
+// const db = mongoose.connection;
+// db.on("error", console.error.bind(console, "MongoDB connection error: "));
+// db.once("open", function() {
+//     console.log("Connected to MongoDB")
+// })
 
 app.use(express.json());
 app.use('/api', mainRoutes);
+
+app.get('/', (req, res) => {
+    res.send('PINGSUT!');
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

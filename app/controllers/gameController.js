@@ -88,7 +88,7 @@ exports.reset = async (req, res) => {
 
         let player = await Games.findOne({ username });
 
-        if (!player) {
+        if (!player) {      
             player = new Games({ username });
         }
 

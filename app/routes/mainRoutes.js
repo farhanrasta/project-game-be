@@ -12,5 +12,4 @@ router.post('/game/reset/:username', gameController.reset);
 router.delete('/logout/:username', authController.logout);
 router.get('/game/leaderboard/:username', gameController.leaderboard);
 
-
 module.exports = router;
